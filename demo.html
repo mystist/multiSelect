@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>demo</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="multiSelect.js"></script>
+  
+	
+</head>
+
+<body>
+
+<div style="width: 800px; height: 600px; margin: 100px auto 0 auto;">
+
+
+<select id="first" onmousedown="disableSelect();">
+    <option>nothing</option>
+    <option>something</option>
+    <option>anything</option>
+</select>
+
+<div class="multiSelect">
+  <select style="width:200px; height: 20px; font-size: 14px; font-family: '宋体';">
+    <option>item1</option>
+    <option>item2</option>
+    <option>item3</option>
+    <option>item4</option>
+    <option>item5</option>
+    <option>item6</option>
+    <option>item7</option>
+    <option>item8</option>
+  </select>
+</div>
+
+<div>
+  <select id="sele" class="oselect" style="margin-top: 100px; width:200px; font-size: 14px;">
+    <option><span style="display:none;">item1</span></option>
+    <option>item2</option>
+    <option>item3</option>
+    <option>item4</option>
+    <option>item5</option>
+    <option>item6</option>
+    <option>item7</option>
+    <option>item8</option>
+  </select>
+</div>
+
+
+
+
+<input onclick="show3();" type="button" value="show3" />
+<input onclick="inputFocus();" type="button" value="inputFocus" />
+<input onclick="test();" type="button" value="test" />
+  
+<span>
+item888
+</span>
+
+</div>
+
+
+<script type="text/javascript">
+
+
+  $(document).ready(function() {
+    $(".multiSelect").multiSelect({
+      "isSingleRow": true
+    });
+  });
+  
+  function show() {
+    $("#sele")[0].size = $("#sele")[0].length;
+  }
+  
+  function inputFocus() {
+    $("input:first").focus();
+  }
+  function show2() {
+    var element = $("select")[0], worked = false;
+    if (document.createEvent) {
+        var e = document.createEvent("MouseEvents");
+        e.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        worked = element.dispatchEvent(e);
+    } else if (element.fireEvent) {
+        worked = element.fireEvent("onmousedown");
+    }
+    if (!worked) {
+        alert("It didn't worked in your browser.");
+    }
+  }
+  function show3() {
+    var input = document.getElementById('first');
+    if (input) {
+        input.onmousedown = function(e) {
+
+          if (!e) e = window.event;
+          e.cancelBubble = true;
+          if (e.stopPropagation) e.stopPropagation();
+
+        }
+    }
+  }
+  function disableSelect() {
+    window.event.returnValue=false;
+  }
+  function test() {
+    $("input:first").val("sdasdasdadqweqweqweqweqwewqeqweasdsdfdgfsgsdfg").focus();
+  }
+
+</script>
+
+</body>
+</html>
